@@ -22,7 +22,7 @@ namespace PrimeGenerator
 
         private Boolean IsPrime(long number)
         {
-            if ((int)number == 1) return false;
+            if ((int)number == 1 || (int)number == 0) return false;
             for (int i = 2; i <= number / 2; i++)
             {
                 if (((int)number % i) == 0) return false;
@@ -37,7 +37,7 @@ namespace PrimeGenerator
             {
                 if (IsPrime(i)) primeNumbers.Add(i);
             }
-            return primeNumbers;
+           return primeNumbers;
         }
 
         public List<long> GetPrimesParallel(long first, long last)
@@ -61,6 +61,7 @@ namespace PrimeGenerator
                         primeNumbers.AddRange(localPrimes);
                     }
                 });
+            primeNumbers.Sort();
             return primeNumbers;
         }
     }
