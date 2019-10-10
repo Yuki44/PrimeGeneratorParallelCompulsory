@@ -1,6 +1,8 @@
 # Prime Numbers Generator
 
-This is a compulsory assignment
+This is a compulsory assignment for Parallel Programming course
+
+[![Prime Numbers Generator](https://i.gyazo.com/3f01726ef59a63446622283c0bd76e7f.png)](https://gyazo.com/3f01726ef59a63446622283c0bd76e7f)
 
 ## Getting Started
 
