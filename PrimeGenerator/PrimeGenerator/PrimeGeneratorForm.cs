@@ -12,42 +12,49 @@ namespace PrimeGenerator
 {
     public partial class PrimeNumbersGenerator : Form
     {
+        private List<long> listOfPrimes = new List<long>();
+        private readonly Program _program = new Program();
+
         public PrimeNumbersGenerator()
         {
             InitializeComponent();
         }
 
-        private void startRangeTextBox_TextChanged(object sender, EventArgs e)
-        {
-            // TODO
-        }
-
-        private void endRangeTextBox_TextChanged(object sender, EventArgs e)
-        {
-            // TODO
-        }
-
-        private void sequentialButton_Click(object sender, EventArgs e)
-        {
-            image.Visible = false;
-            // TODO
-        }
-
         private void clearAllButton_Click(object sender, EventArgs e)
         {
             primeNumbersListBox.Items.Clear();
-            endRangeTextBox.Clear();
-            startRangeTextBox.Clear();
+            endRangeBox.Value = 0;
+            startRangeBox.Value = 0;
             image.Visible = true;
             timeUsedLabel.Visible = false;
         }
 
         private void parallelButton_Click(object sender, EventArgs e)
         {
-            image.Visible = false;
-            // TODO
+            if (startRangeBox.Value >= 0 && endRangeBox.Value > startRangeBox.Value)
+            {
+                image.Visible = false;
+                var startRange = Convert.ToInt64(startRangeBox.Value);
+                var endRange = Convert.ToInt64(endRangeBox.Value);
+                var primes = _program.GetPrimesParallel(startRange, endRange);
+            }
         }
+        private void sequentialButton_Click(object sender, EventArgs e)
+        {
+            long[] primes;
 
+            if (startRangeBox.Value >= 0 && endRangeBox.Value > startRangeBox.Value)
+            {
+                image.Visible = false;
+                var startRange = Convert.ToInt64(startRangeBox.Value);
+                var endRange = Convert.ToInt64(endRangeBox.Value);
+                listOfPrimes = _program.GetPrimesSequential(startRange, endRange);
+                primes = listOfPrimes.Cast<long>().ToArray();
+
+            }
+
+            // primeNumbersListBox.Items.AddRange(primes);
+        }
         private void primeNumbersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // TODO
@@ -57,6 +64,6 @@ namespace PrimeGenerator
         {
             // TODO
         }
-        
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using System.Windows.Forms;
 
 namespace PrimeGenerator
 {
-    static class Program
+    public class Program
     {
         /// <summary>
         /// The main entry point for the application.
@@ -19,26 +20,48 @@ namespace PrimeGenerator
             Application.Run(new PrimeNumbersGenerator());
         }
 
-        private static List<long> GetPrimesSequential(long first, long last)
+        private Boolean IsPrime(long number)
         {
-            List<long> primes = new List<long>();
-
-            for (long num = first; num <= last; num++)
+            if ((int)number == 1) return false;
+            for (int i = 2; i <= number / 2; i++)
             {
-                var ctr = 0;
-
-                for (long i = 2; i <= num / 2; i++)
-                {
-                    if (num % i == 0)
-                    {
-                        ctr++;
-                        break;
-                    }
-                }
-                if(ctr==0 && num!= 1)
-                    primes.Add(num);
+                if (((int)number % i) == 0) return false;
             }
-            return primes;
+            return true;
+        }
+
+        public List<long> GetPrimesSequential(long first, long last)
+        {
+            List<long> primeNumbers = new List<long>();
+            for (long i = first; i < last; i++)
+            {
+                if (IsPrime(i)) primeNumbers.Add(i);
+            }
+            return primeNumbers;
+        }
+
+        public List<long> GetPrimesParallel(long first, long last)
+        {
+            List<long> primeNumbers = new List<long>();
+            Parallel.ForEach(
+                Partitioner.Create(first, last),
+                () => new List<long>(),
+                (Tuple<long, long> range, ParallelLoopState state, List<long> localPrimes) =>
+                {
+                    for (int i = (int)range.Item1; i < range.Item2; i++)
+                    {
+                        if (IsPrime(i)) localPrimes.Add(i);
+                    }
+                    return localPrimes;
+                },
+                (localPrimes) =>
+                {
+                    lock (primeNumbers)
+                    {
+                        primeNumbers.AddRange(localPrimes);
+                    }
+                });
+            return primeNumbers;
         }
     }
 }

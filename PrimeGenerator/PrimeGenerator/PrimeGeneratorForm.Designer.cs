@@ -32,14 +32,16 @@
             this.primeNumbersListBox = new System.Windows.Forms.ListBox();
             this.sequentialButton = new System.Windows.Forms.Button();
             this.parallelButton = new System.Windows.Forms.Button();
-            this.startRangeTextBox = new System.Windows.Forms.TextBox();
-            this.endRangeTextBox = new System.Windows.Forms.TextBox();
             this.startRangeLabel = new System.Windows.Forms.Label();
             this.endRangeLabel = new System.Windows.Forms.Label();
             this.clearAllButton = new System.Windows.Forms.Button();
             this.timeUsedLabel = new System.Windows.Forms.Label();
             this.image = new System.Windows.Forms.PictureBox();
+            this.startRangeBox = new System.Windows.Forms.NumericUpDown();
+            this.endRangeBox = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startRangeBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.endRangeBox)).BeginInit();
             this.SuspendLayout();
             // 
             // primeNumbersListBox
@@ -74,26 +76,6 @@
             this.parallelButton.Text = "Start Parallelized Prime Generator";
             this.parallelButton.UseVisualStyleBackColor = true;
             this.parallelButton.Click += new System.EventHandler(this.parallelButton_Click);
-            // 
-            // startRangeTextBox
-            // 
-            this.startRangeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startRangeTextBox.Location = new System.Drawing.Point(297, 33);
-            this.startRangeTextBox.Name = "startRangeTextBox";
-            this.startRangeTextBox.Size = new System.Drawing.Size(100, 21);
-            this.startRangeTextBox.TabIndex = 1;
-            this.startRangeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.startRangeTextBox.TextChanged += new System.EventHandler(this.startRangeTextBox_TextChanged);
-            // 
-            // endRangeTextBox
-            // 
-            this.endRangeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.endRangeTextBox.Location = new System.Drawing.Point(410, 33);
-            this.endRangeTextBox.Name = "endRangeTextBox";
-            this.endRangeTextBox.Size = new System.Drawing.Size(100, 21);
-            this.endRangeTextBox.TabIndex = 2;
-            this.endRangeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.endRangeTextBox.TextChanged += new System.EventHandler(this.endRangeTextBox_TextChanged);
             // 
             // startRangeLabel
             // 
@@ -149,17 +131,35 @@
             this.image.TabIndex = 13;
             this.image.TabStop = false;
             // 
+            // startRangeBox
+            // 
+            this.startRangeBox.Location = new System.Drawing.Point(297, 33);
+            this.startRangeBox.Name = "startRangeBox";
+            this.startRangeBox.Size = new System.Drawing.Size(102, 20);
+            this.startRangeBox.TabIndex = 1;
+            this.startRangeBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.startRangeBox.ThousandsSeparator = true;
+            // 
+            // endRangeBox
+            // 
+            this.endRangeBox.Location = new System.Drawing.Point(410, 33);
+            this.endRangeBox.Name = "endRangeBox";
+            this.endRangeBox.Size = new System.Drawing.Size(102, 20);
+            this.endRangeBox.TabIndex = 2;
+            this.endRangeBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.endRangeBox.ThousandsSeparator = true;
+            // 
             // PrimeNumbersGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.endRangeBox);
+            this.Controls.Add(this.startRangeBox);
             this.Controls.Add(this.clearAllButton);
             this.Controls.Add(this.endRangeLabel);
             this.Controls.Add(this.startRangeLabel);
-            this.Controls.Add(this.endRangeTextBox);
-            this.Controls.Add(this.startRangeTextBox);
             this.Controls.Add(this.parallelButton);
             this.Controls.Add(this.sequentialButton);
             this.Controls.Add(this.image);
@@ -168,6 +168,8 @@
             this.Name = "PrimeNumbersGenerator";
             this.Text = "Prime Numbers Generator  -  Team Ground Zero";
             ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startRangeBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.endRangeBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -178,13 +180,13 @@
         private System.Windows.Forms.ListBox primeNumbersListBox;
         private System.Windows.Forms.Button sequentialButton;
         private System.Windows.Forms.Button parallelButton;
-        private System.Windows.Forms.TextBox startRangeTextBox;
-        private System.Windows.Forms.TextBox endRangeTextBox;
         private System.Windows.Forms.Label startRangeLabel;
         private System.Windows.Forms.Label endRangeLabel;
         private System.Windows.Forms.Button clearAllButton;
         private System.Windows.Forms.Label timeUsedLabel;
         private System.Windows.Forms.PictureBox image;
+        private System.Windows.Forms.NumericUpDown startRangeBox;
+        private System.Windows.Forms.NumericUpDown endRangeBox;
     }
 }
 
