@@ -6,13 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Forms;
 
 namespace PrimeGenerator
 {
     public partial class PrimeNumbersGenerator : Form
     {
-        private List<long> listOfPrimes = new List<long>();
         private readonly Program _program = new Program();
 
         public PrimeNumbersGenerator()
@@ -22,9 +23,16 @@ namespace PrimeGenerator
 
         private void clearAllButton_Click(object sender, EventArgs e)
         {
-            primeNumbersListBox.Items.Clear();
+            clearAll();
             endRangeBox.Value = 0;
             startRangeBox.Value = 0;
+        }
+
+        private void clearAll()
+        {
+            primeNumbersListBox.DataSource = null;
+            loadingRound.Visible = false;
+            stickmanLoading.Visible = false;
             image.Visible = true;
             timeUsedLabel.Visible = false;
         }
@@ -33,36 +41,60 @@ namespace PrimeGenerator
         {
             if (startRangeBox.Value >= 0 && endRangeBox.Value > startRangeBox.Value)
             {
+                clearAll();
+                loadingRound.Visible = true;
+                stickmanLoading.Visible = true;
                 image.Visible = false;
                 var startRange = Convert.ToInt64(startRangeBox.Value);
                 var endRange = Convert.ToInt64(endRangeBox.Value);
-                var primes = _program.GetPrimesParallel(startRange, endRange);
+                GetBigListAsync(startRange, endRange, "parallel").ContinueWith(r => {
+                    List<long> list = (r.Result);
+                    populateListBox(list);
+                },
+                    TaskScheduler.FromCurrentSynchronizationContext());
             }
         }
         private void sequentialButton_Click(object sender, EventArgs e)
         {
-            long[] primes;
-
             if (startRangeBox.Value >= 0 && endRangeBox.Value > startRangeBox.Value)
             {
+                clearAll();
+                loadingRound.Visible = true;
+                stickmanLoading.Visible = true;
                 image.Visible = false;
                 var startRange = Convert.ToInt64(startRangeBox.Value);
                 var endRange = Convert.ToInt64(endRangeBox.Value);
-                listOfPrimes = _program.GetPrimesSequential(startRange, endRange);
-                primes = listOfPrimes.Cast<long>().ToArray();
-
+                GetBigListAsync(startRange, endRange, "sequential").ContinueWith(r => {
+                    List<long> list = (r.Result);
+                    populateListBox(list);
+                },
+                   TaskScheduler.FromCurrentSynchronizationContext());
             }
-
-            // primeNumbersListBox.Items.AddRange(primes);
-        }
-        private void primeNumbersListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // TODO
         }
 
-        private void timeUsedLabel_Click(object sender, EventArgs e)
+        private async Task<List<long>> GetBigListAsync(long startRange, long endRange, string method)
         {
-            // TODO
+            if (method == "sequential")
+            {
+                var myTask = Task.Run(() => _program.GetPrimesSequential(startRange, endRange));
+                List<long> result = await myTask;
+                return result;
+            }
+            else if(method == "parallel")
+            {
+                var myTask = Task.Run(() => _program.GetPrimesParallel(startRange, endRange));
+                List<long> result = await myTask;
+                return result;
+            }
+            return null;
+        }
+
+
+        private void populateListBox(List<long> list)
+        {
+            loadingRound.Visible = false;
+            stickmanLoading.Visible = false;
+            primeNumbersListBox.DataSource = list;
         }
 
     }
