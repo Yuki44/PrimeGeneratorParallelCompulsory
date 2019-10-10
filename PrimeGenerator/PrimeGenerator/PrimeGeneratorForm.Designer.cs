@@ -119,10 +119,10 @@ namespace PrimeGenerator
             // timeUsedLabel
             // 
             this.timeUsedLabel.AutoSize = true;
-            this.timeUsedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeUsedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timeUsedLabel.Location = new System.Drawing.Point(360, 140);
             this.timeUsedLabel.Name = "timeUsedLabel";
-            this.timeUsedLabel.Size = new System.Drawing.Size(83, 17);
+            this.timeUsedLabel.Size = new System.Drawing.Size(103, 22);
             this.timeUsedLabel.TabIndex = 12;
             this.timeUsedLabel.Text = "Time used";
             this.timeUsedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

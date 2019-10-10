@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -76,14 +77,20 @@ namespace PrimeGenerator
         {
             if (method == "sequential")
             {
+                Stopwatch sw = Stopwatch.StartNew();
                 var myTask = Task.Run(() => _program.GetPrimesSequential(startRange, endRange));
                 List<long> result = await myTask;
+                sw.Stop();
+                timeUsedLabel.Text = (sw.ElapsedMilliseconds / 1000.0 + " ms");
                 return result;
             }
             else if(method == "parallel")
             {
+                Stopwatch sw = Stopwatch.StartNew();
                 var myTask = Task.Run(() => _program.GetPrimesParallel(startRange, endRange));
                 List<long> result = await myTask;
+                sw.Stop();
+                timeUsedLabel.Text = (sw.ElapsedMilliseconds / 1000.0+ " ms");
                 return result;
             }
             return null;
@@ -94,6 +101,7 @@ namespace PrimeGenerator
         {
             loadingRound.Visible = false;
             stickmanLoading.Visible = false;
+            timeUsedLabel.Visible = true;
             primeNumbersListBox.DataSource = list;
         }
 
