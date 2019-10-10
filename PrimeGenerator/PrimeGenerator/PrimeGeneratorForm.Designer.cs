@@ -77,18 +77,20 @@
             // 
             // startRangeTextBox
             // 
+            this.startRangeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startRangeTextBox.Location = new System.Drawing.Point(297, 33);
             this.startRangeTextBox.Name = "startRangeTextBox";
-            this.startRangeTextBox.Size = new System.Drawing.Size(100, 20);
+            this.startRangeTextBox.Size = new System.Drawing.Size(100, 21);
             this.startRangeTextBox.TabIndex = 1;
             this.startRangeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.startRangeTextBox.TextChanged += new System.EventHandler(this.startRangeTextBox_TextChanged);
             // 
             // endRangeTextBox
             // 
+            this.endRangeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.endRangeTextBox.Location = new System.Drawing.Point(410, 33);
             this.endRangeTextBox.Name = "endRangeTextBox";
-            this.endRangeTextBox.Size = new System.Drawing.Size(100, 20);
+            this.endRangeTextBox.Size = new System.Drawing.Size(100, 21);
             this.endRangeTextBox.TabIndex = 2;
             this.endRangeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.endRangeTextBox.TextChanged += new System.EventHandler(this.endRangeTextBox_TextChanged);
