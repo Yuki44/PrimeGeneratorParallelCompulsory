@@ -2,7 +2,7 @@
 
 This is a compulsory assignment for Parallel Programming course
 
-[![Prime Numbers Generator](https://i.gyazo.com/3f01726ef59a63446622283c0bd76e7f.png)](https://gyazo.com/3f01726ef59a63446622283c0bd76e7f)
+[![Prime Numbers Generator](https://i.gyazo.com/247d755bff191a54300eea6724c6be90.png)](https://gyazo.com/247d755bff191a54300eea6724c6be90)
 
 ## Getting Started
 
