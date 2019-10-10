@@ -29,16 +29,22 @@ namespace PrimeGenerator
 
         private void sequentialButton_Click(object sender, EventArgs e)
         {
+            image.Visible = false;
             // TODO
         }
 
         private void clearAllButton_Click(object sender, EventArgs e)
         {
-            // TODO
+            primeNumbersListBox.Items.Clear();
+            endRangeTextBox.Clear();
+            startRangeTextBox.Clear();
+            image.Visible = true;
+            timeUsedLabel.Visible = false;
         }
 
         private void parallelButton_Click(object sender, EventArgs e)
         {
+            image.Visible = false;
             // TODO
         }
 
@@ -46,5 +52,11 @@ namespace PrimeGenerator
         {
             // TODO
         }
+
+        private void timeUsedLabel_Click(object sender, EventArgs e)
+        {
+            // TODO
+        }
+        
     }
 }

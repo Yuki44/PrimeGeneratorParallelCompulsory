@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrimeNumbersGenerator));
             this.primeNumbersListBox = new System.Windows.Forms.ListBox();
             this.sequentialButton = new System.Windows.Forms.Button();
             this.parallelButton = new System.Windows.Forms.Button();
@@ -36,23 +37,27 @@
             this.startRangeLabel = new System.Windows.Forms.Label();
             this.endRangeLabel = new System.Windows.Forms.Label();
             this.clearAllButton = new System.Windows.Forms.Button();
+            this.timeUsedLabel = new System.Windows.Forms.Label();
+            this.image = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
             this.SuspendLayout();
             // 
             // primeNumbersListBox
             // 
             this.primeNumbersListBox.FormattingEnabled = true;
-            this.primeNumbersListBox.Location = new System.Drawing.Point(53, 148);
+            this.primeNumbersListBox.Location = new System.Drawing.Point(53, 174);
             this.primeNumbersListBox.Name = "primeNumbersListBox";
-            this.primeNumbersListBox.Size = new System.Drawing.Size(699, 290);
+            this.primeNumbersListBox.Size = new System.Drawing.Size(699, 264);
             this.primeNumbersListBox.TabIndex = 0;
             this.primeNumbersListBox.SelectedIndexChanged += new System.EventHandler(this.primeNumbersListBox_SelectedIndexChanged);
             // 
             // sequentialButton
             // 
             this.sequentialButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.sequentialButton.Location = new System.Drawing.Point(53, 93);
+            this.sequentialButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sequentialButton.Location = new System.Drawing.Point(36, 93);
             this.sequentialButton.Name = "sequentialButton";
-            this.sequentialButton.Size = new System.Drawing.Size(216, 36);
+            this.sequentialButton.Size = new System.Drawing.Size(222, 46);
             this.sequentialButton.TabIndex = 3;
             this.sequentialButton.Text = "Start Sequential Prime Generator";
             this.sequentialButton.UseVisualStyleBackColor = true;
@@ -61,9 +66,10 @@
             // parallelButton
             // 
             this.parallelButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.parallelButton.Location = new System.Drawing.Point(536, 93);
+            this.parallelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.parallelButton.Location = new System.Drawing.Point(530, 93);
             this.parallelButton.Name = "parallelButton";
-            this.parallelButton.Size = new System.Drawing.Size(216, 36);
+            this.parallelButton.Size = new System.Drawing.Size(222, 46);
             this.parallelButton.TabIndex = 4;
             this.parallelButton.Text = "Start Parallelized Prime Generator";
             this.parallelButton.UseVisualStyleBackColor = true;
@@ -90,18 +96,20 @@
             // startRangeLabel
             // 
             this.startRangeLabel.AutoSize = true;
-            this.startRangeLabel.Location = new System.Drawing.Point(294, 17);
+            this.startRangeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startRangeLabel.Location = new System.Drawing.Point(294, 14);
             this.startRangeLabel.Name = "startRangeLabel";
-            this.startRangeLabel.Size = new System.Drawing.Size(62, 13);
+            this.startRangeLabel.Size = new System.Drawing.Size(76, 16);
             this.startRangeLabel.TabIndex = 10;
             this.startRangeLabel.Text = "Start range:";
             // 
             // endRangeLabel
             // 
             this.endRangeLabel.AutoSize = true;
-            this.endRangeLabel.Location = new System.Drawing.Point(407, 17);
+            this.endRangeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.endRangeLabel.Location = new System.Drawing.Point(407, 14);
             this.endRangeLabel.Name = "endRangeLabel";
-            this.endRangeLabel.Size = new System.Drawing.Size(59, 13);
+            this.endRangeLabel.Size = new System.Drawing.Size(73, 16);
             this.endRangeLabel.TabIndex = 11;
             this.endRangeLabel.Text = "End range:";
             // 
@@ -110,16 +118,40 @@
             this.clearAllButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.clearAllButton.Location = new System.Drawing.Point(354, 69);
             this.clearAllButton.Name = "clearAllButton";
-            this.clearAllButton.Size = new System.Drawing.Size(105, 23);
+            this.clearAllButton.Size = new System.Drawing.Size(105, 30);
             this.clearAllButton.TabIndex = 5;
             this.clearAllButton.Text = "Clear the generator";
             this.clearAllButton.UseVisualStyleBackColor = true;
             this.clearAllButton.Click += new System.EventHandler(this.clearAllButton_Click);
             // 
+            // timeUsedLabel
+            // 
+            this.timeUsedLabel.AutoSize = true;
+            this.timeUsedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeUsedLabel.Location = new System.Drawing.Point(360, 140);
+            this.timeUsedLabel.Name = "timeUsedLabel";
+            this.timeUsedLabel.Size = new System.Drawing.Size(83, 17);
+            this.timeUsedLabel.TabIndex = 12;
+            this.timeUsedLabel.Text = "Time used";
+            this.timeUsedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.timeUsedLabel.Click += new System.EventHandler(this.timeUsedLabel_Click);
+            // 
+            // image
+            // 
+            this.image.Image = ((System.Drawing.Image)(resources.GetObject("image.Image")));
+            this.image.InitialImage = ((System.Drawing.Image)(resources.GetObject("image.InitialImage")));
+            this.image.Location = new System.Drawing.Point(21, 93);
+            this.image.Name = "image";
+            this.image.Size = new System.Drawing.Size(752, 551);
+            this.image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.image.TabIndex = 13;
+            this.image.TabStop = false;
+            // 
             // PrimeNumbersGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.clearAllButton);
             this.Controls.Add(this.endRangeLabel);
@@ -128,9 +160,12 @@
             this.Controls.Add(this.startRangeTextBox);
             this.Controls.Add(this.parallelButton);
             this.Controls.Add(this.sequentialButton);
+            this.Controls.Add(this.image);
             this.Controls.Add(this.primeNumbersListBox);
+            this.Controls.Add(this.timeUsedLabel);
             this.Name = "PrimeNumbersGenerator";
             this.Text = "Prime Numbers Generator  -  Team Ground Zero";
+            ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,6 +181,8 @@
         private System.Windows.Forms.Label startRangeLabel;
         private System.Windows.Forms.Label endRangeLabel;
         private System.Windows.Forms.Button clearAllButton;
+        private System.Windows.Forms.Label timeUsedLabel;
+        private System.Windows.Forms.PictureBox image;
     }
 }
 
