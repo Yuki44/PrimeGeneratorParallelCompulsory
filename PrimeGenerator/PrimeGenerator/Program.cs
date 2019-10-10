@@ -20,12 +20,25 @@ namespace PrimeGenerator
             Application.Run(new PrimeNumbersGenerator());
         }
 
-        private Boolean IsPrime(long number)
+        public bool IsPrime(long number)
         {
-            if ((int)number == 1 || (int)number == 0) return false;
-            for (int i = 2; i <= number / 2; i++)
+            if (number % 2 == 0)
             {
-                if (((int)number % i) == 0) return false;
+                return false;
+            }
+            else
+            {
+                if (number == 1)
+                {
+                    return false;
+                }
+                for (int i = 3; i < number / 2; i += 2)
+                {
+                    if (number % i == 0)
+                    {
+                        return false;
+                    }
+                }
             }
             return true;
         }
@@ -35,34 +48,38 @@ namespace PrimeGenerator
             List<long> primeNumbers = new List<long>();
             for (long i = first; i < last; i++)
             {
-                if (IsPrime(i)) primeNumbers.Add(i);
+                if (IsPrime(i))
+                    primeNumbers.Add(i);
             }
-           return primeNumbers;
+            return primeNumbers;
+
         }
 
         public List<long> GetPrimesParallel(long first, long last)
         {
-            List<long> primeNumbers = new List<long>();
+            var lockObject = new Object();
+            IEnumerable<long> primeNumbers = new List<long>();
             Parallel.ForEach(
                 Partitioner.Create(first, last),
                 () => new List<long>(),
-                (Tuple<long, long> range, ParallelLoopState state, List<long> localPrimes) =>
+                (range, loopState, partialResult) =>
                 {
-                    for (int i = (int)range.Item1; i < range.Item2; i++)
+                    for (long i = range.Item1; i < range.Item2; i++)
                     {
-                        if (IsPrime(i)) localPrimes.Add(i);
+                        if (IsPrime(i))
+                            partialResult.Add(i);
                     }
-                    return localPrimes;
+                    return partialResult;
                 },
-                (localPrimes) =>
+                (partialResult) =>
                 {
-                    lock (primeNumbers)
+                    lock (lockObject)
                     {
-                        primeNumbers.AddRange(localPrimes);
+                        primeNumbers = primeNumbers.Concat(partialResult);
                     }
-                });
-            primeNumbers.Sort();
-            return primeNumbers;
+                }
+                );
+            return primeNumbers.OrderBy(s => s).ToList();
         }
     }
 }

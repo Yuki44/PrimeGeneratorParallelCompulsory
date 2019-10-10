@@ -81,7 +81,7 @@ namespace PrimeGenerator
                 var myTask = Task.Run(() => _program.GetPrimesSequential(startRange, endRange));
                 List<long> result = await myTask;
                 sw.Stop();
-                timeUsedLabel.Text = (sw.ElapsedMilliseconds / 1000.0 + " ms");
+                timeUsedLabel.Text = (sw.ElapsedMilliseconds / 1000.0 + " secs");
                 return result;
             }
             else if(method == "parallel")
@@ -90,7 +90,7 @@ namespace PrimeGenerator
                 var myTask = Task.Run(() => _program.GetPrimesParallel(startRange, endRange));
                 List<long> result = await myTask;
                 sw.Stop();
-                timeUsedLabel.Text = (sw.ElapsedMilliseconds / 1000.0+ " ms");
+                timeUsedLabel.Text = (sw.ElapsedMilliseconds / 1000.0+ " secs");
                 return result;
             }
             return null;
