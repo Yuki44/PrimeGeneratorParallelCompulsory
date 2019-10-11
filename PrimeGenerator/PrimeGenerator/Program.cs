@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,6 +81,46 @@ namespace PrimeGenerator
                 }
                 );
             return primeNumbers.OrderBy(s => s).ToList();
+        }
+
+        //Sieve of Eratosthenes
+        public void GetPrimesSieveOfEratosthenes(long start, long end)
+        {
+            List<long> primes = new List<long>();
+            bool[] is_prime = new bool[end + 1];
+            if (start <= 2)
+            {
+                for (long i = 2; i <= end; i++)
+                {
+                    is_prime[i] = true;
+                }
+                // Cross out multiples.
+                for (long i = 2; i <= end; i++)
+                {
+                    // See if i is prime.
+                    if (is_prime[i])
+                    {
+                        // Knock out multiples of i.
+                        for (long j = i * 2; j <= end; j += i)
+                            is_prime[j] = false;
+                    }
+                }
+            }
+            else
+            {
+                for (long i = start; i <= end; i++)
+                {
+                    is_prime[i] = true;
+                }
+                for (long i = start; i <= end; i++)
+                {
+                    if (is_prime[i])
+                    {
+                        for (long j = i * 2; j <= end; j += i)
+                            is_prime[j] = false;
+                    }
+                }
+            }
         }
     }
 }
