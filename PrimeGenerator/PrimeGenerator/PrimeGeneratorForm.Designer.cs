@@ -146,11 +146,21 @@ namespace PrimeGenerator
             23283,
             0,
             0});
+            this.startRangeBox.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.startRangeBox.Name = "startRangeBox";
             this.startRangeBox.Size = new System.Drawing.Size(102, 20);
             this.startRangeBox.TabIndex = 1;
             this.startRangeBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.startRangeBox.ThousandsSeparator = true;
+            this.startRangeBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // endRangeBox
             // 
@@ -160,11 +170,21 @@ namespace PrimeGenerator
             23283,
             0,
             0});
+            this.endRangeBox.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.endRangeBox.Name = "endRangeBox";
             this.endRangeBox.Size = new System.Drawing.Size(102, 20);
             this.endRangeBox.TabIndex = 2;
             this.endRangeBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.endRangeBox.ThousandsSeparator = true;
+            this.endRangeBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // loadingRound
             // 

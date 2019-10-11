@@ -25,8 +25,8 @@ namespace PrimeGenerator
         private void clearAllButton_Click(object sender, EventArgs e)
         {
             clearAll();
-            endRangeBox.Value = 0;
-            startRangeBox.Value = 0;
+            endRangeBox.Value = 1;
+            startRangeBox.Value = 1;
         }
 
         private void clearAll()
@@ -84,15 +84,15 @@ namespace PrimeGenerator
                 timeUsedLabel.Text = (sw.ElapsedMilliseconds / 1000.0 + " secs");
                 return result;
             }
-            else if(method == "parallel")
-            {
-                Stopwatch sw = Stopwatch.StartNew();
-                var myTask = Task.Run(() => _program.GetPrimesParallel(startRange, endRange));
-                List<long> result = await myTask;
-                sw.Stop();
-                timeUsedLabel.Text = (sw.ElapsedMilliseconds / 1000.0+ " secs");
-                return result;
-            }
+            //else if(method == "parallel")
+            //{
+            //    Stopwatch sw = Stopwatch.StartNew();
+            //    var myTask = Task.Run(() => _program.GetPrimesParallel(startRange, endRange));
+            //    List<long> result = await myTask;
+            //    sw.Stop();
+            //    timeUsedLabel.Text = (sw.ElapsedMilliseconds / 1000.0+ " secs");
+            //    return result;
+            //}
             return null;
         }
 
