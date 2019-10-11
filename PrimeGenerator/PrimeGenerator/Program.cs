@@ -37,48 +37,6 @@ namespace PrimeGenerator
                 ).ConvertAll(i => (long)i);
         }
 
-        //Sieve of Eratosthenes
-        public List<long> GetPrimesSieveOfEratosthenes(long start, long end)
-        {
-            List<long> primes = new List<long>();
-            bool[] is_prime = new bool[end + 1];
-            if (start <= 2)
-            {
-                for (long i = 2; i <= end; i++)
-                {
-                    is_prime[i] = true;
-                }
-                // Cross out multiples.
-                for (long i = 2; i <= end; i++)
-                {
-                    // See if i is prime.
-                    if (is_prime[i])
-                    {
-                        // Knock out multiples of i.
-                        for (long j = i * 2; j <= end; j += i)
-                            is_prime[j] = false;
-                    }
-                }
-            }
-            else
-            {
-                for (long i = start; i <= end; i++)
-                {
-                    is_prime[i] = true;
-                }
-                for (long i = start; i <= end; i++)
-                {
-                    if (is_prime[i])
-                    {
-                        for (long j = i * 2; j <= end; j += i)
-                            is_prime[j] = false;
-                    }
-                }
-            }
-            
-            return primes;
-        }
-
         //public List<long> GetPrimesParallel(long first, long last)
         //{
         //    var lockObject = new Object();
@@ -86,8 +44,7 @@ namespace PrimeGenerator
         //    Parallel.ForEach(
         //        Partitioner.Create(first, last),
         //        () => new List<long>(),
-        //        (range, loopState, partialResult) =>
-        //        {
+        //        (range, loopState, partialResult) => {
         //            for (long i = range.Item1; i < range.Item2; i++)
         //            {
         //                if (IsPrime(i))
@@ -95,8 +52,7 @@ namespace PrimeGenerator
         //            }
         //            return partialResult;
         //        },
-        //        (partialResult) =>
-        //        {
+        //        (partialResult) => {
         //            lock (lockObject)
         //            {
         //                primeNumbers = primeNumbers.Concat(partialResult);
