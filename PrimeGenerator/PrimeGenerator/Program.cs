@@ -22,6 +22,13 @@ namespace PrimeGenerator
             Application.Run(new PrimeNumbersGenerator());
         }
         
+        static bool IsPrime(int n)
+        {
+            if (n <= 1) return false;
+            for (int i = 2; i * i <= n; i++)            
+                if (n % i == 0) return false;            
+            return true;
+        }
 
         public List<long> GetPrimesSequential(long first, long last)
         {
@@ -37,29 +44,29 @@ namespace PrimeGenerator
                 ).ConvertAll(i => (long)i);
         }
 
-        //public List<long> GetPrimesParallel(long first, long last)
-        //{
-        //    var lockObject = new Object();
-        //    IEnumerable<long> primeNumbers = new List<long>();
-        //    Parallel.ForEach(
-        //        Partitioner.Create(first, last),
-        //        () => new List<long>(),
-        //        (range, loopState, partialResult) => {
-        //            for (long i = range.Item1; i < range.Item2; i++)
-        //            {
-        //                if (IsPrime(i))
-        //                    partialResult.Add(i);
-        //            }
-        //            return partialResult;
-        //        },
-        //        (partialResult) => {
-        //            lock (lockObject)
-        //            {
-        //                primeNumbers = primeNumbers.Concat(partialResult);
-        //            }
-        //        }
-        //        );
-        //    return primeNumbers.OrderBy(s => s).ToList();
-        //}
+        public List<long> GetPrimesParallel(long first, long last)
+        {
+            var lockObject = new Object();
+            IEnumerable<long> primeNumbers = new List<long>();
+            Parallel.ForEach(
+                Partitioner.Create(first, last),
+                () => new List<long>(),
+                (range, loopState, partialResult) => {
+                    for (long i = range.Item1; i < range.Item2; i++)
+                    {
+                        if (IsPrime((int)i))
+                            partialResult.Add(i);
+                    }
+                    return partialResult;
+                },
+                (partialResult) => {
+                    lock (lockObject)
+                    {
+                        primeNumbers = primeNumbers.Concat(partialResult);
+                    }
+                }
+                );
+            return primeNumbers.OrderBy(s => s).ToList();
+        }
     }
 }

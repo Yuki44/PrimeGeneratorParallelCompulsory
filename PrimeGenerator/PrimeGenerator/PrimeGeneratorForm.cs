@@ -51,8 +51,7 @@ namespace PrimeGenerator
                 var startRange = Convert.ToInt64(startRangeBox.Value);
                 var endRange = Convert.ToInt64(endRangeBox.Value);
                 GetBigListAsync(startRange, endRange, "parallel").ContinueWith(r => {
-                    List<long> list = (r.Result);
-                    // populateListBox(list);
+                    PopulateListBox(r.Result);
                 },
                     TaskScheduler.FromCurrentSynchronizationContext());
             }
@@ -68,8 +67,7 @@ namespace PrimeGenerator
                 var startRange = Convert.ToInt64(startRangeBox.Value);
                 var endRange = Convert.ToInt64(endRangeBox.Value);
                 GetBigListAsync(startRange, endRange, "sequential").ContinueWith(r => {
-                    List<long> list = (r.Result);
-                     PopulateListBox(list);
+                    PopulateListBox(r.Result);
                 },
                     TaskScheduler.FromCurrentSynchronizationContext());
             }
@@ -86,15 +84,15 @@ namespace PrimeGenerator
                 timeUsedLabel.Text = (sw.ElapsedMilliseconds / 1000.0 + " secs");
                 return result;
             }
-            //else if(method == "parallel")
-            //{
-            //    Stopwatch sw = Stopwatch.StartNew();
-            //    var myTask = Task.Run(() => _program.GetPrimesParallel(startRange, endRange));
-            //    List<long> result = await myTask;
-            //    sw.Stop();
-            //    timeUsedLabel.Text = (sw.ElapsedMilliseconds / 1000.0+ " secs");
-            //    return result;
-            //}
+            else if (method == "parallel")
+            {
+                Stopwatch sw = Stopwatch.StartNew();
+                var myTask = Task.Run(() => _program.GetPrimesParallel(startRange, endRange));
+                List<long> result = await myTask;
+                sw.Stop();
+                timeUsedLabel.Text = (sw.ElapsedMilliseconds / 1000.0 + " secs");
+                return result;
+            }
             return null;
         }
 
