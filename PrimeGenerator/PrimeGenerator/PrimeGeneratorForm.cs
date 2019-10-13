@@ -6,10 +6,12 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace PrimeGenerator
 {
@@ -50,7 +52,7 @@ namespace PrimeGenerator
                 var endRange = Convert.ToInt64(endRangeBox.Value);
                 GetBigListAsync(startRange, endRange, "parallel").ContinueWith(r => {
                     List<long> list = (r.Result);
-                    populateListBox(list);
+                    // populateListBox(list);
                 },
                     TaskScheduler.FromCurrentSynchronizationContext());
             }
@@ -67,9 +69,9 @@ namespace PrimeGenerator
                 var endRange = Convert.ToInt64(endRangeBox.Value);
                 GetBigListAsync(startRange, endRange, "sequential").ContinueWith(r => {
                     List<long> list = (r.Result);
-                    populateListBox(list);
+                     PopulateListBox(list);
                 },
-                   TaskScheduler.FromCurrentSynchronizationContext());
+                    TaskScheduler.FromCurrentSynchronizationContext());
             }
         }
 
@@ -96,14 +98,12 @@ namespace PrimeGenerator
             return null;
         }
 
-
-        private void populateListBox(List<long> list)
+        private void PopulateListBox(List<long> list)
         {
             loadingRound.Visible = false;
             stickmanLoading.Visible = false;
             timeUsedLabel.Visible = true;
             primeNumbersListBox.DataSource = list;
         }
-
     }
 }
